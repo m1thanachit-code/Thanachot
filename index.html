@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI วิเคราะห์ขยะ — แอปตัวอย่าง</title>
+
+  <!-- Teachable Machine / TensorFlow -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" role="application" aria-label="AI วิเคราะห์ด้วยกล้อง">
+    <div class="panel" id="left">
+      <header>
+        <h1>🧠 ระบบ AI วิเคราะห์ (ตัวอย่าง)</h1>
+        <p>ใช้กล้องตรวจจับวัตถุและแสดงผลเป็นแถบเปอร์เซ็นต์</p>
+      </header>
+
+      <div id="webcam-wrap" style="margin-top:12px">
+        <div id="webcam" aria-live="polite" aria-label="แสดงภาพจากกล้อง">
+          <div style="color:var(--muted);font-size:13px">กล้องจะปรากฏที่นี่เมื่อเริ่ม</div>
+        </div>
+
+        <div class="controls" style="margin-top:6px">
+          <button id="startBtn" class="primary">เริ่ม</button>
+          <button id="stopBtn">หยุด</button>
+          <select id="facingSelect" title="เลือกกล้อง">
+            <option value="user">กล้องหน้า (user)</option>
+            <option value="environment">กล้องหลัง (environment)</option>
+          </select>
+        </div>
+
+        <div style="margin-top:8px;display:flex;gap:8px;">
+          <input id="modelPath" style="flex:1" placeholder="พาธของโมเดล (เช่น ./my_model/)" value="./my_model/" />
+          <button id="loadModelBtn">โหลดโมเดล</button>
+        </div>
+
+        <div style="margin-top:10px;">
+          <div class="small" id="status">สถานะ: ยังไม่ได้โหลดโมเดล</div>
+        </div>
+      </div>
+
+      <footer style="margin-top:12px" class="small">
+        หมายเหตุ: เบราว์เซอร์ต้องอนุญาตเข้าถึงกล้อง; บนบางระบบต้องใช้ HTTPS
+      </footer>
+    </div>
+
+    <div class="panel" id="right">
+      <div class="results">
+        <div class="top-pred" aria-live="polite">
+          <div>
+            <div style="color:var(--muted);font-size:13px">การคาดการณ์สูงสุด</div>
+            <div class="label" id="topLabel">-</div>
+            <div style="color:var(--muted);font-size:12px" id="topDesc">-</div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-size:12px;color:var(--muted)">FPS: <span id="fps">0</span></div>
+            <div style="font-size:12px;color:var(--muted)">คลาส: <span id="classCount">0</span></div>
+          </div>
+        </div>
+
+        <h3 style="margin:0;font-size:14px;color:var(--muted);margin-top:6px">เปอร์เซ็นต์ความมั่นใจ</h3>
+        <div class="confidence-list" id="labelContainer" aria-live="polite"></div>
+
+        <div style="margin-top:8px">
+          <div style="color:var(--muted);font-size:13px">การคาดการณ์แนวโน้ม (ตัวอย่าง)</div>
+          <div id="forecast" style="font-size:13px;color:var(--muted)">ไม่มีข้อมูล</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --accent: #06b6d4;
+  --muted: #94a3b8;
+  --glass: rgba(255,255,255,0.03);
+  --success: #10b981;
+  --danger: #ef4444;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg, #071024 0%, #061428 100%);
+  color: #e6eef6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.app {
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.7);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+header h1 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Webcam */
+#webcam-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+#webcam {
+  width: 320px;
+  height: 240px;
+  background: var(--glass);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+.controls button,
+.controls input,
+.controls select {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.controls button.primary {
+  background: linear-gradient(90deg, var(--accent), #7dd3fc 120%);
+  color: #022;
+  border: none;
+  font-weight: 600;
+}
+
+/* Results */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.top-pred {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.top-pred .label {
+  font-size: 18px;
+  font-weight: 700;
+}
+.confidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+.bar-left {
+  min-width: 120px;
+  font-size: 14px;
+}
+.progress-wrap {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  height: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #34d399);
+  transition: width 200ms linear;
+  border-radius: 8px;
+}
+.percent {
+  min-width: 52px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+footer.small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .app {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  #webcam {
+    width: 100%;
+    height: 220px;
+  }
+}
